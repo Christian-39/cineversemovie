@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse: Movies & TV Shows</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+
+<body>
+    <!-- Header & Navigation -->
+    <header class="bg-gray-900 shadow-lg fixed top-0 left-0 right-0 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+
+            <a href="#" id="app-logo"
+                class="text-2xl font-bold text-red-500 hover:text-red-400 transition duration-150">CineVerse</a>
+
+            <nav class="main-nav">
+                <a href="#" data-view="home-view"
+                    class="nav-link text-gray-300 hover:text-red-500 transition duration-150 font-medium">Home</a>
+                <a href="#" data-view="movies-view"
+                    class="nav-link text-gray-300 hover:text-red-500 transition duration-150 font-medium">Movies</a>
+                <a href="#" data-view="tv-shows-view"
+                    class="nav-link text-gray-300 hover:text-red-500 transition duration-150 font-medium">TV Shows</a>
+                <a href="#" data-view="watchlist-view"
+                    class="nav-link text-gray-300 hover:text-red-500 transition duration-150 font-medium flex items-center">
+                    <i class="fas fa-heart text-sm mr-2"></i> Watchlist
+                </a>
+            </nav>
+            <form id="search-form" class="hidden md:block">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Search for movies..."
+                        class="bg-gray-700 text-white rounded-full py-2 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-red-500 w-48 text-sm">
+                    <button type="submit" class="absolute right-0 top-0 mt-2 mr-3 text-gray-400 hover:text-white">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+
+            <button class="hamburger-menu md:hidden text-gray-300 focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="pt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-screen">
+        <div class="py-4 md:hidden">
+            <form id="search-form-mobile" class="w-full">
+                <div class="relative">
+                    <input type="text" id="search-input-mobile" placeholder="Search for movies..."
+                        class="bg-gray-700 text-white rounded-full py-3 pl-5 pr-12 focus:outline-none focus:ring-2 focus:ring-red-500 w-full">
+                    <button type="submit" class="absolute right-0 top-0 mt-3 mr-4 text-gray-400 hover:text-white">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div id="home-view" class="content-view">
+            <section class="hero-section hero-home rounded-xl my-4" style="min-height: 60vh;">
+                <div class="hero-content">
+                    <p class="text-red-500 font-bold mb-2 uppercase tracking-widest text-sm">Now Trending</p>
+                    <h1 id="home-hero-title" class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                        Loading Title...</h1>
+                    <p id="home-hero-description" class="text-lg text-gray-300 mb-6">Loading Synopsis...</p>
+                    <button id="home-hero-trailer-btn"
+                        class="trailer-trigger bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center shadow-lg">
+                        <i class="fas fa-play mr-2"></i> Watch Trailer
+                    </button>
+                </div>
+            </section>
+
+            <section class="explore-section py-8">
+                <h2 id="explore-title" class="text-3xl font-bold text-white mb-6 border-l-4 border-red-500 pl-3">Explore
+                    Popular Movies</h2>
+
+                <div id="genre-nav" class="genre-nav-container flex space-x-3 pb-4 mb-4">
+                </div>
+
+                <div
+                    class="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 movie-listings">
+                </div>
+
+                <div class="pagination-container flex justify-center items-center space-x-3 py-12">
+                    <button id="prev-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div id="page-numbers" class="flex space-x-2">
+                    </div>
+                    <button id="next-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div id="movies-view" class="content-view hidden">
+            <!-- Hero Section for Movies -->
+            <section class="hero-section hero-movie rounded-xl my-4" style="min-height: 60vh;">
+                <div class="hero-content">
+                    <p class="text-red-500 font-bold mb-2 uppercase tracking-widest text-sm">Movie Spotlight</p>
+                    <h1 id="movie-hero-title" class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                        Loading Title...</h1>
+                    <p id="movie-hero-description" class="text-lg text-gray-300 mb-6">Loading Synopsis...</p>
+                    <button id="movie-hero-trailer-btn"
+                        class="trailer-trigger bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center shadow-lg">
+                        <i class="fas fa-play mr-2"></i> Watch Trailer
+                    </button>
+                </div>
+            </section>
+
+            <!-- Category Filter for Movies -->
+            <div class="category-filter flex space-x-3 py-4 border-b border-gray-700 mb-6">
+                <button data-api-url="popular"
+                    class="filter-btn active bg-red-600 text-white font-medium py-2 px-4 rounded-full transition duration-200">Popular</button>
+                <button data-api-url="top_rated"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">Top
+                    Rated</button>
+                <button data-api-url="now_playing"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">Now
+                    Playing</button>
+                <button data-api-url="upcoming"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">Upcoming</button>
+            </div>
+
+            <section class="explore-section">
+                <h2 id="movies-explore-title" class="text-3xl font-bold text-white mb-6 border-l-4 border-red-500 pl-3">
+                    Popular Movies</h2>
+
+                <!-- Genre Filter Navigation -->
+                <div id="genre-nav-movies" class="genre-nav-container flex space-x-3 pb-4 mb-4">
+                </div>
+
+                <!-- Movie Grid -->
+                <div class="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <div class="movie-card"></div>
+                </div>
+
+                <div class="pagination-container flex justify-center items-center space-x-3 py-12">
+                    <button id="prev-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div id="page-numbers" class="flex space-x-2">
+                    </div>
+                    <button id="next-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div id="tv-shows-view" class="content-view hidden">
+            <!-- Hero Section for TV Shows -->
+            <section class="hero-section hero-tv rounded-xl my-4" style="min-height: 60vh;">
+                <div class="hero-content">
+                    <p class="text-red-500 font-bold mb-2 uppercase tracking-widest text-sm">TV Show Spotlight</p>
+                    <h1 id="tv-hero-title" class="text-4xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                        Loading Title...</h1>
+                    <p id="tv-hero-description" class="text-lg text-gray-300 mb-6">Loading Synopsis...</p>
+                    <button id="tv-hero-trailer-btn"
+                        class="trailer-trigger bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 flex items-center shadow-lg">
+                        <i class="fas fa-play mr-2"></i> Watch Trailer
+                    </button>
+                </div>
+            </section>
+
+            <!-- Category Filter for TV Shows -->
+            <div class="category-filter flex space-x-3 py-4 border-b border-gray-700 mb-6">
+                <button data-api-url="popular"
+                    class="filter-btn active bg-red-600 text-white font-medium py-2 px-4 rounded-full transition duration-200">Popular</button>
+                <button data-api-url="top_rated_tv"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">Top
+                    Rated</button>
+                <button data-api-url="on_the_air"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">On
+                    The Air</button>
+                <button data-api-url="airing_today"
+                    class="filter-btn bg-gray-700 text-gray-300 hover:bg-red-700 font-medium py-2 px-4 rounded-full transition duration-200">Airing
+                    Today</button>
+            </div>
+
+            <section class="explore-section py-4">
+                <h2 id="tv-shows-explore-title"
+                    class="text-3xl font-bold text-white mb-6 border-l-4 border-red-500 pl-3">Popular TV Shows</h2>
+
+                <!-- Genre Filter Navigation -->
+                <div id="genre-nav-tv" class="genre-nav-container flex space-x-3 pb-4 mb-4">
+                    <!-- Genre buttons rendered here by JS (Will reuse #genre-nav logic for population) -->
+                </div>
+
+                <!-- Movie Grid -->
+                <div
+                    class="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 movie-listings">
+                    <!-- Movie cards will be rendered here -->
+                </div>
+
+                <!-- Pagination (reused) -->
+                <div class="pagination-container flex justify-center items-center space-x-3 py-12">
+                    <button id="prev-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </button>
+                    <div id="page-numbers" class="flex space-x-2">
+                        <!-- Page number buttons will be rendered here -->
+                    </div>
+                    <button id="next-page-btn"
+                        class="bg-gray-700 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-full disabled:opacity-50 transition duration-200">
+                        Next <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div id="watchlist-view" class="content-view hidden py-8">
+            <h2 class="text-4xl font-extrabold text-white mb-8 border-l-4 border-red-500 pl-4">My Watchlist</h2>
+            <div id="watchlist-grid"
+                class="movie-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 movie-listings">
+                <p class="text-center text-xl text-gray-300 col-span-full pt-10">Loading Watchlist...</p>
+            </div>
+        </div>
+
+    </main>
+
+    <div id="video-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div class="video-player-container">
+                <div id="video-player">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 CineVerse. Data provided by The Movie Database (TMDB).</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script src="movie-details.js"></script>
+</body>
+
+</html>
